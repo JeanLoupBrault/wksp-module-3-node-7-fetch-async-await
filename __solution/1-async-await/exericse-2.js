@@ -13,11 +13,11 @@ const doubleLater = (num) => {
 // 2.2
 const addPromise = async (num) => {
 
-        const a = await doubleLater(10);
-        const b = await doubleLater(20);
-        const c = await doubleLater(30);
+    const a = await doubleLater(10);
+    const b = await doubleLater(20);
+    const c = await doubleLater(30);
 
-        return (num + a + b + c);
+    return (num + a + b + c);
 }
 
 addPromise(10).then((sum) => {

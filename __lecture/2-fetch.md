@@ -4,8 +4,8 @@
 
 - `fetch()` is a JavaScript (but not in NodeJS) Promise-based function.
 - It's mainly used to
-    - `GET` from somewhere
-    - `POST` data somewhere
+  - `GET` from somewhere
+  - `POST` data somewhere
 
 The syntax is very similar to Promises.
 
@@ -14,16 +14,16 @@ The syntax is very similar to Promises.
 ### `GET`
 
 ```js
-fetch('<URL>')
-    .then(res => {
-        // if response is successful
-            // do something.
-        // else
-            // do something else.
-        // you can return something to another .then, or not...
-    })
-    .then()
-    .catch() // you can also catch errors!
+fetch("<URL>")
+  .then(res => {
+    // if response is successful
+    // do something.
+    // else
+    // do something else.
+    // you can return something to another .then, or not...
+  })
+  .then()
+  .catch(); // you can also catch errors!
 ```
 
 ---
@@ -31,22 +31,22 @@ fetch('<URL>')
 ### `POST
 
 ```js
-fetch('<URL>'{
-        method: 'POST', // (optional) for `GET`
-        mode: '',       // (optional) no-cors, *cors, same-origin
-        cache: '',      // (optional) no-cache, reload, force-cache, only-if-cached
-        credentials: '',// (optional) include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json' // (optional) but we'll use it.
-            // (optional) other options / parameters that can be set here.
-            },
-        body: JSON.stringify({ // good practice to stringify, even if not always required.
-            // the data that you want to send to the server.
-        })
-    })
-    .then(res => {
-        // do stuff
-    });
+fetch("<URL>", {
+  method: "POST", // (optional) for `GET`
+  mode: "", // (optional) no-cors, *cors, same-origin
+  cache: "", // (optional) no-cache, reload, force-cache, only-if-cached
+  credentials: "", // (optional) include, *same-origin, omit
+  headers: {
+    "Content-Type": "application/json" // (optional) but we'll use it.
+    // (optional) other options / parameters that can be set here.
+  },
+  body: JSON.stringify({
+    // good practice to stringify, even if not always required.
+    // the data that you want to send to the server.
+  })
+}).then(res => {
+  // do stuff
+});
 ```
 
 ---

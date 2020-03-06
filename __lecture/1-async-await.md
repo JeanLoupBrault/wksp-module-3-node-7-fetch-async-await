@@ -11,18 +11,28 @@
 ---
 
 ```js
-const newPauseFunction = (sec) => {
-    return new Promise(function(resolve) {
-        console.log(`${sec}s pause`);
-        setTimeout(() => resolve('resolve'), sec * 1000);
-    });
-}
+const newPauseFunction = sec => {
+  return new Promise(function(resolve) {
+    console.log(`${sec}s pause`);
+    setTimeout(() => resolve(sec * 2), sec * 1000);
+  });
+};
 
 newPauseFunction(1)
-    .then(() => newPauseFunction(2))
-    .then(() => newPauseFunction(3))
-    .then(() => newPauseFunction(3))
-    .then(data => console.log(data));
+  .then(() => newPauseFunction(2))
+  .then(() => newPauseFunction(3))
+  .then(() => newPauseFunction(3))
+  .then(data => console.log(data));
+
+const doIt = async () => {
+  let data = await newPauseFunction(1);
+  data = await newPauseFunction(data);
+  data = await newPauseFunction(data);
+  await newPauseFunction(data);
+  console.log('no more "awaits"');
+};
+
+doIt();
 ```
 
 _let's convert it to async/await_
@@ -35,15 +45,25 @@ Convert the following to async/await
 
 ```js
 transformText(string)
-    .then((str) => allCaps(str))
-    .then((str) => trimFirst(str))
-    .then((str) => trimLast(str))
-    .then((str) => replaceWithX(str))
-    .then((str) => {
-        console.log(str);
-        return str;
-    })
-    .catch((err) => console.log(err));
+  .then(str => allCaps(str))
+  .then(str => trimFirst(str))
+  .then(str => trimLast(str))
+  .then(str => replaceWithX(str))
+  .then(str => {
+    console.log(str);
+    return str;
+  })
+  .catch(err => console.log(err));
+
+const transformText = async string => {
+  const str = await allCaps(string);
+  const nextStr = await trimFirst(str);
+  const nextNextStr = await trimLast(str);
+  await replaceWithX(str);
+  console.log('no more "awaits"');
+};
+
+transformText();
 ```
 
 ---
@@ -56,15 +76,17 @@ As much as possible, you should wrap your `await`(s) inside of a `try/catch` blo
 
 ```js
 const asyncPause = async () => {
-    try {
-        console.log('Go');
-        await newPauseFunction(1);
-        await newPauseFunction(2);
-        await newPauseFunction(3);
-        await newPauseFunction(3);
-        console.log('Stop');
-    } catch (err) { console.log(err) }
-}
+  try {
+    console.log("Go");
+    await newPauseFunction(1);
+    await newPauseFunction(2);
+    await newPauseFunction(3);
+    await newPauseFunction(3);
+    console.log("Stop");
+  } catch (err) {
+    console.log(err);
+  }
+};
 asyncPause();
 ```
 

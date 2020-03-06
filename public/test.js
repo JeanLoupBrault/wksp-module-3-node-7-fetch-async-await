@@ -1,4 +1,3 @@
-// nothing here yet...
 const handleXSubmit = (event) => {
     event.preventDefault();
 
